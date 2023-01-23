@@ -9,6 +9,12 @@
         <div class="mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
+                    <form action="{{route('mesapartes.buscar')}}" method="POST">
+                        @csrf
+                        <x-input-label for="entidad" value="NRO DE EXPEDIENTE" />
+                        <input type="text" name="nroexpediente" placeholder="Nro Expediente" class="mb-4">
+                        <x-primary-button>Buscar</x-secondary-button>
+                    </form>
                     <table class="border-collapse border border-slate-500 w-full">
                         <tr class="border">
                             <th class="border border-slate-600">NRO EXPEDIENTE</th>

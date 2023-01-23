@@ -31,7 +31,7 @@ class RegistroController extends Controller
         //
     }
     public function lista(){
-        $data['registros']=Registro::paginate(3);
+        $data['registros']=Registro::paginate(10);
         return view('dashboard', $data);
     }
     /**
@@ -87,9 +87,19 @@ class RegistroController extends Controller
      * @param  \App\Models\Registro  $registro
      * @return \Illuminate\Http\Response
      */
-    public function edit(Registro $registro)
+    public function buscar(Request $request)
     {
-        //
+        $request->validate([
+            '_token' => ['required'],
+            'nroexpediente' => ['required']
+        ]);
+        $expediente=Registro::where('nroexpediente', $request->nroexpediente)->first();
+        if(is_null($expediente)){
+            echo 'NO EXISTE EXPEDIENTE';
+        }else{
+            return redirect()->route('mesapartes.derivar', $expediente);
+        }
+        
     }
 
     /**

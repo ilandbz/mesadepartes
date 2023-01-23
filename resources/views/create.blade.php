@@ -64,7 +64,7 @@ input[type=number] {
         <div class="mt-4">
             <x-input-label for="archivo" :value="__('Archivo')" />
             <x-text-input id="archivo" class="block mt-1 w-full" type="file" name="archivo" :value="old('archivo')" required autofocus 
-            accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document, .pdf" />
+            accept=".pdf" />
             <x-input-error :messages="$errors->get('archivo')" class="mt-2" />
         </div>
         <div class="flex items-center justify-end mt-4">
