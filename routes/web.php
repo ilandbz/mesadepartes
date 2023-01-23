@@ -17,12 +17,11 @@ use App\Http\Controllers\RegistroController;
 
 Route::get('/', [RegistroController::class, 'index'])->name('mesapartes');
 Route::post('/store', [RegistroController::class, 'store'])->name('mesapartes.store');
+Route::get('/show/{registro}', [RegistroController::class, 'show'])->name('mesapartes.derivar');
+Route::put('/update/{registro}', [RegistroController::class, 'update'])->name('mesapartes.update');
+Route::get('/delete/{registro}', [RegistroController::class, 'destroy'])->name('mesapartes.destroy');
 
-
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [RegistroController::class, 'lista'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -9,6 +9,6 @@ class Registro extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'tipodocumento', 'nrodocumento', 'entidad', 'email', 'celular', 'area', 'asunto', 'archivo'
+        'tipodocumento', 'nrodocumento', 'nroexpediente', 'entidad', 'email', 'celular', 'area', 'asunto', 'estado', 'archivo'
     ];
 }

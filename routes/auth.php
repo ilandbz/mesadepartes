@@ -18,7 +18,7 @@ Route::middleware('guest')->group(function () {
     Route::post('register', [RegisteredUserController::class, 'store']);
 
     Route::get('intranet', [AuthenticatedSessionController::class, 'create'])
-                ->name('login');
+                ->name('intranet');
 
     Route::post('intranet', [AuthenticatedSessionController::class, 'store']);
 

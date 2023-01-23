@@ -1,4 +1,18 @@
 <x-guest-layout>
+<style>
+    /* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+</style>
+
     <form method="POST" action="{{ route('mesapartes.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="">
@@ -11,7 +25,7 @@
         </div>
         <div class="mt-4">
             <x-input-label for="nrodocumento" :value="__('Nro Documento')" />
-            <x-text-input id="nrodocumento" class="block mt-1 w-full" type="text" name="nrodocumento" :value="old('nrodocumento')" placeholder="00000000" required autofocus maxlength="11" />
+            <x-text-input id="nrodocumento" class="block mt-1 w-full" type="number" name="nrodocumento" :value="old('nrodocumento')" placeholder="00000000" required autofocus maxlength="11" />
             <x-input-error :messages="$errors->get('nrodocumento')" class="mt-2" />
         </div>        
         <!-- Name -->
@@ -29,7 +43,7 @@
         <!-- celular -->
         <div class="mt-4">
             <x-input-label for="celular" :value="__('Celular')" />
-            <x-text-input id="celular" class="block mt-1 w-full" type="text" name="celular" :value="old('celular')" required autofocus placeholder="000000000" maxlength="9" />
+            <x-text-input id="celular" class="block mt-1 w-full" type="number" name="celular" :value="old('celular')" required autofocus placeholder="000000000" maxlength="9" />
             <x-input-error :messages="$errors->get('celular')" class="mt-2" />
         </div>
         <div class="mt-4">

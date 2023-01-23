@@ -30,7 +30,10 @@ class RegistroController extends Controller
     {
         //
     }
-
+    public function lista(){
+        $data['registros']=Registro::paginate(3);
+        return view('dashboard', $data);
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -40,7 +43,17 @@ class RegistroController extends Controller
     public function store(StoreRegistroRequest $request)
     {
         $request->validated();
-        $registro = Registro::Create([
+        $nroexpediente = time();
+        if($request->hasFile('archivo')){
+            $file = $request->file('archivo');
+            $filename = $nroexpediente.'.'.$file->extension();
+            $request->archivo=$filename;
+            $file->move(public_path('archivos'), $filename);   
+        }else{
+            echo 'NO EXISTE ARCHIVO';
+            return 0;
+        }
+        $expediente = Registro::Create([
             'tipodocumento' => $request->tipodocumento,
             'nrodocumento' => $request->nrodocumento,
             'entidad'   => $request->entidad,
@@ -48,9 +61,11 @@ class RegistroController extends Controller
             'celular'   => $request->celular,
             'area'   => $request->area,            
             'asunto'   => $request->asunto,
-            'archivo'   => 'k',            
+            'nroexpediente' => $nroexpediente,
+            'archivo'       => $request->archivo
         ]);
-        $registro->save();
+        $expediente->save();
+        return view('registrado', compact('expediente'));
     }
 
     /**
@@ -61,7 +76,9 @@ class RegistroController extends Controller
      */
     public function show(Registro $registro)
     {
-        //
+        $data['areas']=Area::get();
+        $data['registro']=$registro;
+        return view('show', $data);
     }
 
     /**
@@ -84,7 +101,10 @@ class RegistroController extends Controller
      */
     public function update(UpdateRegistroRequest $request, Registro $registro)
     {
-        //
+        $registro->area=$request->area;
+        $registro->estado=$request->estado;
+        $registro->save();
+        return redirect()->route('intranet');
     }
 
     /**
@@ -95,6 +115,7 @@ class RegistroController extends Controller
      */
     public function destroy(Registro $registro)
     {
-        //
+        $registro->delete();
+        return redirect()->route('intranet');
     }
 }

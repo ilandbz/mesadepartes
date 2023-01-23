@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('registros', function (Blueprint $table) {
             $table->id();
             $table->string('tipodocumento');
+            $table->string('nroexpediente')->unique();
             $table->string('nrodocumento');
             $table->string('entidad');
             $table->string('email');
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->string('area');
             $table->text('asunto');
             $table->string('archivo');
+            $table->string('estado')->default('Registrado');
             $table->timestamps();
         });
     }
